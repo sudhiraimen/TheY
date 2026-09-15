@@ -15,7 +15,6 @@
   :root{
     --bg:#000000;
     --surface:#1c1c1e;
-    --surface-2:#242426;
     --hairline:rgba(255,255,255,0.09);
     --text:#f5f5f7;
     --text-secondary:#98989d;
@@ -122,26 +121,68 @@
     border-radius:20px;
   }
   .barcode-wrap{
-    background:#ffffff;
+    background:transparent;
+    border:1.5px dashed var(--hairline);
     border-radius:14px;
-    padding:18px 12px;
+    padding:30px 16px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
+  }
+  .barcode-wrap.has-barcode{
+    background:#ffffff;
+    border:none;
+    padding:18px 12px;
   }
   .barcode-wrap img{
     width:100%;
     max-width:280px;
     display:block;
   }
-  .barcode-num{
-    color:#1c1c1e;
-    font-size:13px;
-    letter-spacing:0.08em;
+  .barcode-placeholder{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    text-align:center;
+  }
+  .barcode-placeholder svg{
+    width:30px;
+    height:30px;
+    color:var(--text-tertiary);
+  }
+  .barcode-placeholder-title{
+    font-size:15px;
     font-weight:600;
-    margin-top:2px;
-    font-variant-numeric:tabular-nums;
+    color:var(--text);
+  }
+  .barcode-placeholder-sub{
+    font-size:13px;
+    color:var(--text-tertiary);
+    max-width:220px;
+  }
+  .barcode-actions{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-top:14px;
+  }
+  .barcode-action-link{
+    font-size:13px;
+    font-weight:600;
+    color:var(--accent);
+    background:none;
+    border:none;
+    padding:0;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .barcode-reset-link{
+    color:var(--text-tertiary);
   }
 
   /* Hours card */
@@ -246,7 +287,7 @@
 
 <div class="screen">
   <div>
-    <p class="greeting-eyebrow" id="greetingText">Good afternoon</p>
+    <p class="greeting-eyebrow" id="greetingText">Good Afternoon</p>
     <h1 class="greeting-name">Aimen</h1>
   </div>
 
@@ -268,7 +309,21 @@
         <span class="membership-status">Active</span>
       </div>
       <div class="barcode-wrap">
-        <img class="barcode-img" src="data:image/png;base64,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" alt="Membership barcode">
+        <img class="barcode-img" id="barcodeImg" alt="Membership barcode" style="display:none;">
+        <label class="barcode-placeholder" id="barcodePlaceholder" for="barcodeUpload">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.6">
+            <rect x="3" y="6" width="18" height="13" rx="2.5"/>
+            <path d="M3 10H21" stroke-dasharray="1.6 2.4"/>
+            <path d="M8 15L10.2 17.2L16 11.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="barcode-placeholder-title">Add your barcode</span>
+          <span class="barcode-placeholder-sub">Upload a photo of your membership barcode</span>
+        </label>
+      </div>
+      <div class="barcode-actions">
+        <label class="barcode-action-link" for="barcodeUpload" id="uploadLabel" style="display:none;">Replace barcode</label>
+        <input type="file" id="barcodeUpload" accept="image/*" style="display:none">
+        <button type="button" class="barcode-action-link barcode-reset-link" id="resetLink" style="display:none;">Remove barcode</button>
       </div>
     </div>
   </div>
@@ -317,7 +372,7 @@
     <div class="card">
       <a class="schedule-row" href="https://www.cambridgeymca.org/our-y/hours-schedules/" target="_blank" rel="noopener">
         <div class="schedule-text">
-          <span class="schedule-label">Court &amp; pool schedules</span>
+          <span class="schedule-label">Court &amp; Pool Schedules</span>
           <span class="schedule-sub">Basketball, Pickleball, Swim &amp; Group Classes</span>
         </div>
         <span class="schedule-chevron">&#8250;</span>
@@ -336,7 +391,7 @@
     <div class="card">
       <div class="locker-row">
         <div>
-          <div class="locker-label">Men&rsquo;s locker room</div>
+          <div class="locker-label">Men&rsquo;s Locker Room</div>
           <div class="locker-sub">Entry Code</div>
         </div>
         <span class="locker-code">251</span>
@@ -345,14 +400,13 @@
   </div>
 </div>
 
-
 <script>
   // Greeting by time of day
   (function(){
     var h = new Date().getHours();
-    var text = "Good evening";
-    if (h < 12) text = "Good morning";
-    else if (h < 17) text = "Good afternoon";
+    var text = "Good Evening";
+    if (h < 12) text = "Good Morning";
+    else if (h < 17) text = "Good Afternoon";
     document.getElementById("greetingText").textContent = text;
   })();
 
@@ -392,13 +446,59 @@
     if (todayHours && hour >= todayHours.open && hour < todayHours.close) {
       statusDot.style.background = "#ff453a";
       statusText.textContent = "Open Now · Closes " + fmt(todayHours.close);
-    } else {
+    } else if (todayHours && hour < todayHours.open) {
       statusDot.style.background = "#8e8e93";
-      var opensAt = todayHours ? fmt(todayHours.open) : "";
-      statusText.textContent = todayHours && hour < todayHours.open
-        ? "Closed · Opens " + opensAt + " today"
-        : "Closed for today";
+      statusText.textContent = "Closed · Opens " + fmt(todayHours.open) + " today";
+    } else {
+      document.getElementById("statusLine").style.display = "none";
     }
+  })();
+
+  // Custom barcode upload, with persistence for the hosted PWA
+  (function(){
+    var STORAGE_KEY = "y_membership_custom_barcode";
+    var wrap = document.querySelector(".barcode-wrap");
+    var img = document.getElementById("barcodeImg");
+    var placeholder = document.getElementById("barcodePlaceholder");
+    var input = document.getElementById("barcodeUpload");
+    var uploadLabel = document.getElementById("uploadLabel");
+    var resetLink = document.getElementById("resetLink");
+
+    function setHasBarcode(hasBarcode){
+      wrap.classList.toggle("has-barcode", hasBarcode);
+      img.style.display = hasBarcode ? "block" : "none";
+      placeholder.style.display = hasBarcode ? "none" : "flex";
+      uploadLabel.style.display = hasBarcode ? "inline" : "none";
+      resetLink.style.display = hasBarcode ? "inline" : "none";
+    }
+
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        img.src = saved;
+        setHasBarcode(true);
+      }
+    } catch (e) {}
+
+    input.addEventListener("change", function(e){
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        var dataUrl = ev.target.result;
+        img.src = dataUrl;
+        setHasBarcode(true);
+        try { localStorage.setItem(STORAGE_KEY, dataUrl); } catch (err) {}
+      };
+      reader.readAsDataURL(file);
+    });
+
+    resetLink.addEventListener("click", function(){
+      img.removeAttribute("src");
+      input.value = "";
+      setHasBarcode(false);
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    });
   })();
 
   // Register service worker if hosted
