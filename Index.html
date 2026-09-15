@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Y Membership</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Y Membership">
+<meta name="theme-color" content="#000000">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>
+  :root{
+    --bg:#000000;
+    --surface:#1c1c1e;
+    --surface-2:#242426;
+    --hairline:rgba(255,255,255,0.09);
+    --text:#f5f5f7;
+    --text-secondary:#98989d;
+    --text-tertiary:#636366;
+    --accent:#ff453a;
+    --accent-soft:rgba(255,69,58,0.16);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    overscroll-behavior-y:none;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+  .screen{
+    min-height:100vh;
+    min-height:100dvh;
+    padding:calc(env(safe-area-inset-top) + 18px) 20px calc(env(safe-area-inset-bottom) + 28px);
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  /* Greeting */
+  .greeting-eyebrow{
+    font-size:15px;
+    color:var(--text-secondary);
+    font-weight:500;
+    margin:0 0 2px;
+  }
+  .greeting-name{
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0;
+  }
+
+  /* Section label */
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-tertiary);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin:0 0 8px 4px;
+  }
+  .section-label svg{
+    width:13px;
+    height:13px;
+    flex-shrink:0;
+  }
+
+  /* Membership card */
+  .card{
+    background:var(--surface);
+    border-radius:22px;
+    border:1px solid var(--hairline);
+  }
+  .membership-card{
+    padding:22px 22px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .membership-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .membership-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .ymark{
+    width:26px;height:26px;
+    border-radius:7px;
+    background:var(--accent);
+    color:#ffffff;
+    font-weight:800;
+    font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .membership-brand-text{
+    font-size:14px;
+    font-weight:600;
+    color:var(--text-secondary);
+  }
+  .membership-status{
+    font-size:12px;
+    font-weight:600;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:5px 10px;
+    border-radius:20px;
+  }
+  .barcode-wrap{
+    background:#ffffff;
+    border-radius:14px;
+    padding:18px 12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .barcode-wrap img{
+    width:100%;
+    max-width:280px;
+    display:block;
+  }
+  .barcode-num{
+    color:#1c1c1e;
+    font-size:13px;
+    letter-spacing:0.08em;
+    font-weight:600;
+    margin-top:2px;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* Hours card */
+  .hours-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 18px;
+    border-bottom:1px solid var(--hairline);
+  }
+  .hours-row:last-child{border-bottom:none;}
+  .hours-day{
+    font-size:16px;
+    font-weight:500;
+    color:var(--text);
+  }
+  .hours-time{
+    font-size:15px;
+    color:var(--text-secondary);
+    font-variant-numeric:tabular-nums;
+  }
+  .hours-row.today .hours-day{color:var(--accent); font-weight:700;}
+  .hours-row.today .hours-time{color:var(--text);}
+  .today-dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--accent);
+    display:inline-block;
+    margin-right:8px;
+    vertical-align:middle;
+  }
+  .schedule-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    text-decoration:none;
+    border-bottom:1px solid var(--hairline);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .schedule-row:last-child{border-bottom:none;}
+  .schedule-row:active{background:rgba(255,255,255,0.04);}
+  .schedule-text{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    min-width:0;
+  }
+  .schedule-label{
+    font-size:16px;
+    font-weight:500;
+    color:var(--text);
+  }
+  .schedule-sub{
+    font-size:13px;
+    color:var(--text-tertiary);
+    margin-top:1px;
+  }
+  .schedule-chevron{
+    color:var(--text-tertiary);
+    font-size:17px;
+    flex-shrink:0;
+  }
+  .status-line{
+    font-size:13px;
+    color:var(--text-secondary);
+    margin:-18px 4px 0;
+    display:flex;
+    align-items:center;
+  }
+  .status-dot{
+    width:7px;height:7px;border-radius:50%;
+    margin-right:7px;
+  }
+
+  /* Locker card */
+  .locker-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 18px;
+  }
+  .locker-label{
+    font-size:16px;
+    font-weight:500;
+  }
+  .locker-sub{
+    font-size:13px;
+    color:var(--text-tertiary);
+    margin-top:2px;
+  }
+  .locker-code{
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    font-variant-numeric:tabular-nums;
+    color:var(--accent);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <div>
+    <p class="greeting-eyebrow" id="greetingText">Good afternoon</p>
+    <h1 class="greeting-name">Aimen</h1>
+  </div>
+
+  <div>
+    <p class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.6">
+        <rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/>
+        <path d="M2.5 9.5H21.5"/>
+        <path d="M6 15H10" stroke-linecap="round"/>
+      </svg>
+      Membership
+    </p>
+    <div class="card membership-card">
+      <div class="membership-top">
+        <div class="membership-brand">
+          <div class="ymark">Y</div>
+          <span class="membership-brand-text">YMCA</span>
+        </div>
+        <span class="membership-status">Active</span>
+      </div>
+      <div class="barcode-wrap">
+        <img class="barcode-img" src="data:image/png;base64,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" alt="Membership barcode">
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.6">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7V12L15.2 14.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Facility hours
+    </p>
+    <div class="card">
+      <div class="hours-row" data-days="1,2,3,4">
+        <span class="hours-day">Monday &ndash; Thursday</span>
+        <span class="hours-time">6:00 AM &ndash; 9:00 PM</span>
+      </div>
+      <div class="hours-row" data-days="5">
+        <span class="hours-day">Friday</span>
+        <span class="hours-time">6:00 AM &ndash; 8:00 PM</span>
+      </div>
+      <div class="hours-row" data-days="6,0">
+        <span class="hours-day">Saturday &amp; Sunday</span>
+        <span class="hours-time">7:00 AM &ndash; 4:00 PM</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="status-line" id="statusLine"><span class="status-dot" id="statusDot"></span><span id="statusText">Checking hours&hellip;</span></p>
+
+  <div>
+    <p class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3.5" y="5" width="17" height="15.5" rx="3" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M8 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M16 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="8" cy="13.5" r="1.15" fill="currentColor"/>
+        <circle cx="12" cy="13.5" r="1.15" fill="currentColor"/>
+        <circle cx="16" cy="13.5" r="1.15" fill="currentColor"/>
+        <circle cx="8" cy="17" r="1.15" fill="currentColor"/>
+        <circle cx="12" cy="17" r="1.15" fill="currentColor"/>
+      </svg>
+      Schedules
+    </p>
+    <div class="card">
+      <a class="schedule-row" href="https://www.cambridgeymca.org/our-y/hours-schedules/" target="_blank" rel="noopener">
+        <div class="schedule-text">
+          <span class="schedule-label">Court &amp; pool schedules</span>
+          <span class="schedule-sub">Basketball, Pickleball, Swim &amp; Group Classes</span>
+        </div>
+        <span class="schedule-chevron">&#8250;</span>
+      </a>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.6">
+        <rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/>
+        <path d="M7.5 10.5V7.5C7.5 5.01 9.51 3 12 3C14.49 3 16.5 5.01 16.5 7.5V10.5"/>
+      </svg>
+      Room codes
+    </p>
+    <div class="card">
+      <div class="locker-row">
+        <div>
+          <div class="locker-label">Men&rsquo;s locker room</div>
+          <div class="locker-sub">Entry Code</div>
+        </div>
+        <span class="locker-code">251</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Greeting by time of day
+  (function(){
+    var h = new Date().getHours();
+    var text = "Good evening";
+    if (h < 12) text = "Good morning";
+    else if (h < 17) text = "Good afternoon";
+    document.getElementById("greetingText").textContent = text;
+  })();
+
+  // Facility hours: highlight today + open/closed status
+  (function(){
+    var hoursDef = [
+      { days:[1,2,3,4], open:6, close:21 },
+      { days:[5], open:6, close:20 },
+      { days:[6,0], open:7, close:16 }
+    ];
+    var now = new Date();
+    var day = now.getDay();
+    var hour = now.getHours() + now.getMinutes()/60;
+
+    var rows = document.querySelectorAll(".hours-row");
+    rows.forEach(function(row){
+      var days = row.getAttribute("data-days").split(",").map(Number);
+      if (days.indexOf(day) !== -1) {
+        row.classList.add("today");
+        var dayLabel = row.querySelector(".hours-day");
+        dayLabel.innerHTML = '<span class="today-dot"></span>' + dayLabel.textContent;
+      }
+    });
+
+    var todayHours = hoursDef.find(function(d){ return d.days.indexOf(day) !== -1; });
+    var statusDot = document.getElementById("statusDot");
+    var statusText = document.getElementById("statusText");
+
+    function fmt(h){
+      var hh = Math.floor(h);
+      var m = Math.round((h-hh)*60);
+      var ampm = hh >= 12 ? "PM" : "AM";
+      var h12 = hh % 12; if (h12 === 0) h12 = 12;
+      return h12 + (m ? ":" + (m<10?"0":"")+m : "") + " " + ampm;
+    }
+
+    if (todayHours && hour >= todayHours.open && hour < todayHours.close) {
+      statusDot.style.background = "#ff453a";
+      statusText.textContent = "Open Now · Closes " + fmt(todayHours.close);
+    } else {
+      statusDot.style.background = "#8e8e93";
+      var opensAt = todayHours ? fmt(todayHours.open) : "";
+      statusText.textContent = todayHours && hour < todayHours.open
+        ? "Closed · Opens " + opensAt + " today"
+        : "Closed for today";
+    }
+  })();
+
+  // Register service worker if hosted
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+  }
+</script>
+
+</body>
+</html>
