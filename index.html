@@ -76,6 +76,34 @@
     flex-shrink:0;
   }
 
+  /* Tab bar */
+  .tab-bar{
+    display:flex;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .tab-btn{
+    flex:1;
+    background:var(--surface);
+    border:1px solid var(--hairline);
+    border-radius:14px;
+    padding:8px 6px;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-tertiary);
+    cursor:pointer;
+    text-align:center;
+  }
+  .tab-btn.active{
+    background:var(--accent-soft);
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+  .tab-panel[hidden]{
+    display:none;
+  }
+
   /* Membership card */
   .card{
     background:var(--surface);
@@ -146,7 +174,6 @@
     align-items:center;
     gap:8px;
     cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
     text-align:center;
   }
   .barcode-placeholder svg{
@@ -179,7 +206,6 @@
     border:none;
     padding:0;
     cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
   }
   .barcode-reset-link{
     color:var(--text-tertiary);
@@ -220,7 +246,6 @@
     padding:14px 18px;
     text-decoration:none;
     border-bottom:1px solid var(--hairline);
-    -webkit-tap-highlight-color:transparent;
   }
   .schedule-row:last-child{border-bottom:none;}
   .schedule-row:active{background:rgba(255,255,255,0.04);}
@@ -248,7 +273,7 @@
   .status-line{
     font-size:13px;
     color:var(--text-secondary);
-    margin:-18px 4px 0;
+    margin:10px 4px 0;
     display:flex;
     align-items:center;
   }
@@ -331,70 +356,56 @@
   <div>
     <p class="section-label">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.6">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M12 7V12L15.2 14.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 21V9L12 3L20 9V21" stroke-linejoin="round"/>
+        <path d="M9 21V13H15V21" stroke-linejoin="round"/>
       </svg>
-      Facility hours
+      Facility Info
     </p>
-    <div class="card">
-      <div class="hours-row" data-days="1,2,3,4">
-        <span class="hours-day">Monday &ndash; Thursday</span>
-        <span class="hours-time">6:00 AM &ndash; 9:00 PM</span>
+    <div class="tab-bar" id="tabBar">
+      <button type="button" class="tab-btn active" data-tab="hours">Hours</button>
+      <button type="button" class="tab-btn" data-tab="schedules">Schedules</button>
+      <button type="button" class="tab-btn" data-tab="rooms">Room Codes</button>
+    </div>
+
+    <div class="tab-panel" data-panel="hours">
+      <div class="card">
+        <div class="hours-row" data-days="1,2,3,4">
+          <span class="hours-day">Monday &ndash; Thursday</span>
+          <span class="hours-time">6:00 AM &ndash; 9:00 PM</span>
+        </div>
+        <div class="hours-row" data-days="5">
+          <span class="hours-day">Friday</span>
+          <span class="hours-time">6:00 AM &ndash; 8:00 PM</span>
+        </div>
+        <div class="hours-row" data-days="6,0">
+          <span class="hours-day">Saturday &amp; Sunday</span>
+          <span class="hours-time">7:00 AM &ndash; 4:00 PM</span>
+        </div>
       </div>
-      <div class="hours-row" data-days="5">
-        <span class="hours-day">Friday</span>
-        <span class="hours-time">6:00 AM &ndash; 8:00 PM</span>
-      </div>
-      <div class="hours-row" data-days="6,0">
-        <span class="hours-day">Saturday &amp; Sunday</span>
-        <span class="hours-time">7:00 AM &ndash; 4:00 PM</span>
+      <p class="status-line" id="statusLine"><span class="status-dot" id="statusDot"></span><span id="statusText">Checking hours&hellip;</span></p>
+    </div>
+
+    <div class="tab-panel" data-panel="schedules" hidden>
+      <div class="card">
+        <a class="schedule-row" href="https://www.cambridgeymca.org/our-y/hours-schedules/" target="_blank" rel="noopener">
+          <div class="schedule-text">
+            <span class="schedule-label">Court &amp; Pool Schedules</span>
+            <span class="schedule-sub">Basketball, Pickleball, Swim &amp; Group Classes</span>
+          </div>
+          <span class="schedule-chevron">&#8250;</span>
+        </a>
       </div>
     </div>
-  </div>
 
-  <p class="status-line" id="statusLine"><span class="status-dot" id="statusDot"></span><span id="statusText">Checking hours&hellip;</span></p>
-
-  <div>
-    <p class="section-label">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3.5" y="5" width="17" height="15.5" rx="3" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M8 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M16 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        <circle cx="8" cy="13.5" r="1.15" fill="currentColor"/>
-        <circle cx="12" cy="13.5" r="1.15" fill="currentColor"/>
-        <circle cx="16" cy="13.5" r="1.15" fill="currentColor"/>
-        <circle cx="8" cy="17" r="1.15" fill="currentColor"/>
-        <circle cx="12" cy="17" r="1.15" fill="currentColor"/>
-      </svg>
-      Schedules
-    </p>
-    <div class="card">
-      <a class="schedule-row" href="https://www.cambridgeymca.org/our-y/hours-schedules/" target="_blank" rel="noopener">
-        <div class="schedule-text">
-          <span class="schedule-label">Court &amp; Pool Schedules</span>
-          <span class="schedule-sub">Basketball, Pickleball, Swim &amp; Group Classes</span>
+    <div class="tab-panel" data-panel="rooms" hidden>
+      <div class="card">
+        <div class="locker-row">
+          <div>
+            <div class="locker-label">Men&rsquo;s Locker Room</div>
+            <div class="locker-sub">Entry Code</div>
+          </div>
+          <span class="locker-code">251</span>
         </div>
-        <span class="schedule-chevron">&#8250;</span>
-      </a>
-    </div>
-  </div>
-
-  <div>
-    <p class="section-label">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.6">
-        <rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/>
-        <path d="M7.5 10.5V7.5C7.5 5.01 9.51 3 12 3C14.49 3 16.5 5.01 16.5 7.5V10.5"/>
-      </svg>
-      Room codes
-    </p>
-    <div class="card">
-      <div class="locker-row">
-        <div>
-          <div class="locker-label">Men&rsquo;s Locker Room</div>
-          <div class="locker-sub">Entry Code</div>
-        </div>
-        <span class="locker-code">251</span>
       </div>
     </div>
   </div>
@@ -452,6 +463,23 @@
     } else {
       document.getElementById("statusLine").style.display = "none";
     }
+  })();
+
+  // Tab bar: switch between Hours, Schedules, and Room Codes
+  (function(){
+    var tabBar = document.getElementById("tabBar");
+    if (!tabBar) return;
+    var buttons = tabBar.querySelectorAll(".tab-btn");
+    var panels = document.querySelectorAll(".tab-panel");
+
+    tabBar.addEventListener("click", function(e){
+      var btn = e.target.closest(".tab-btn");
+      if (!btn) return;
+      var target = btn.getAttribute("data-tab");
+
+      buttons.forEach(function(b){ b.classList.toggle("active", b === btn); });
+      panels.forEach(function(p){ p.hidden = p.getAttribute("data-panel") !== target; });
+    });
   })();
 
   // Custom barcode upload, with persistence for the hosted PWA
