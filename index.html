@@ -317,6 +317,64 @@
     color:var(--accent);
   }
 
+  /* Confirmation sheet */
+  .sheet-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.2s ease;
+    z-index:100;
+  }
+  .sheet-overlay.open{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .sheet{
+    width:100%;
+    max-width:520px;
+    padding:8px;
+    padding-bottom:calc(env(safe-area-inset-bottom) + 8px);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    transform:translateY(16px);
+    transition:transform 0.22s ease;
+  }
+  .sheet-overlay.open .sheet{
+    transform:translateY(0);
+  }
+  .sheet-actions{
+    background:var(--surface);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .sheet-btn{
+    display:block;
+    width:100%;
+    background:none;
+    border:none;
+    padding:16px;
+    font-family:inherit;
+    font-size:17px;
+    font-weight:600;
+    text-align:center;
+    cursor:pointer;
+  }
+  .sheet-btn-destructive{
+    color:var(--accent);
+  }
+  .sheet-cancel{
+    background:var(--surface);
+    border-radius:14px;
+    color:var(--text);
+    font-weight:700;
+  }
+
 </style>
 </head>
 <body>
@@ -422,6 +480,15 @@
   </div>
 </div>
 
+<div class="sheet-overlay" id="sheetOverlay">
+  <div class="sheet">
+    <div class="sheet-actions">
+      <button type="button" class="sheet-btn sheet-btn-destructive" id="sheetConfirmBtn">Confirm</button>
+    </div>
+    <button type="button" class="sheet-btn sheet-cancel" id="sheetCancelBtn">Cancel</button>
+  </div>
+</div>
+
 <script>
   // Greeting by time of day
   (function(){
@@ -493,6 +560,31 @@
     });
   })();
 
+  // Custom confirmation sheet (used instead of native confirm(), which
+  // some in-app / sandboxed webviews block or suppress)
+  function showConfirmSheet(actionLabel, onConfirm){
+    var overlay = document.getElementById("sheetOverlay");
+    var confirmBtn = document.getElementById("sheetConfirmBtn");
+    var cancelBtn = document.getElementById("sheetCancelBtn");
+
+    confirmBtn.textContent = actionLabel;
+    overlay.classList.add("open");
+
+    function cleanup(){
+      overlay.classList.remove("open");
+      confirmBtn.removeEventListener("click", onConfirmClick);
+      cancelBtn.removeEventListener("click", onCancelClick);
+      overlay.removeEventListener("click", onOverlayClick);
+    }
+    function onConfirmClick(){ cleanup(); onConfirm(); }
+    function onCancelClick(){ cleanup(); }
+    function onOverlayClick(e){ if (e.target === overlay) cleanup(); }
+
+    confirmBtn.addEventListener("click", onConfirmClick);
+    cancelBtn.addEventListener("click", onCancelClick);
+    overlay.addEventListener("click", onOverlayClick);
+  }
+
   // Custom barcode upload, with persistence for the hosted PWA
   (function(){
     var STORAGE_KEY = "y_membership_custom_barcode";
@@ -532,11 +624,22 @@
       reader.readAsDataURL(file);
     });
 
+    // Confirm before replacing an existing barcode (the "Add your barcode"
+    // placeholder has no existing barcode to lose, so it skips the prompt)
+    uploadLabel.addEventListener("click", function(e){
+      if (wrap.classList.contains("has-barcode")) {
+        e.preventDefault();
+        showConfirmSheet("Replace Barcode", function(){ input.click(); });
+      }
+    });
+
     resetLink.addEventListener("click", function(){
-      img.removeAttribute("src");
-      input.value = "";
-      setHasBarcode(false);
-      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      showConfirmSheet("Remove Barcode", function(){
+        img.removeAttribute("src");
+        input.value = "";
+        setHasBarcode(false);
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      });
     });
   })();
 
